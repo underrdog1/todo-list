@@ -138,7 +138,6 @@ function App() {
         onChange={handleChange} 
         />
         <button className="addTask-btn" onClick={addTask}>Add Task</button>
-        <Helmet title="Add Task"></Helmet>
       </div>
 
       <div className="list">
