@@ -142,8 +142,6 @@ function App() {
       </div>
 
       <div className="list">
-
-        <Helmet title="List of Tasks"></Helmet>
       </div>
       {todoList.map((task) => (
         <Task
