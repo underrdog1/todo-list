@@ -2,6 +2,7 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import { Task } from './Task';
 import '@fontsource/winky-sans';
+import { Helmet } from 'react-helmet';
 
 function App() {
 
@@ -15,12 +16,12 @@ function App() {
       const now = new Date();
       const hoursDifference = (now - lastUpdated) / (1000 * 60 * 60); 
 
-      // If 24 hours have passed, reset the tasks
+      
       if (hoursDifference >= 24) {
-        localStorage.setItem('timestamp', Date.now().toString()); // Update timestamp
+        localStorage.setItem('timestamp', Date.now().toString()); 
         return JSON.parse(savedTodoList).map(task => ({
           ...task,
-          completed: false, // Reset the task status
+          completed: false, 
         }));
       }
     }
@@ -29,12 +30,12 @@ function App() {
 
   const [newTask, setNewTask] = useState('');
   const [resetEnabled, setResetEnabled] = useState(localStorage.getItem('resetEnabled') === 'true');
-  const [resetNotification, setResetNotification] = useState(false); // Notification state
+  const [resetNotification, setResetNotification] = useState(false); 
 
   useEffect(() => {
     if (resetNotification) {
       setTimeout(() => {
-        setResetNotification(false); // Hide notification after 3 seconds
+        setResetNotification(false);
       }, 3000);
     }
   }, [resetNotification]);
@@ -111,6 +112,11 @@ function App() {
 
   return (
     <div className="App">
+      <Helmet>
+      <title>Priorify</title>
+      <meta name="description" content="A simple to-do list app with automatic task reset." />
+      <meta name="keywords" content="to-do list, task management,priority, task reset, automatic reset" />
+    </Helmet>
       <h1>To-do List</h1>
       
       {resetNotification && <div className="notification">Tasks have been reset due to 24-hour interval!</div>}
@@ -132,9 +138,13 @@ function App() {
         onChange={handleChange} 
         />
         <button className="addTask-btn" onClick={addTask}>Add Task</button>
+        <Helmet title="Add Task"></Helmet>
       </div>
 
-      <div className="list"></div>
+      <div className="list">
+
+        <Helmet title="List of Tasks"></Helmet>
+      </div>
       {todoList.map((task) => (
         <Task
           key={task.id}
